@@ -1,11 +1,21 @@
 import './PortfolioList.scss';
-export default function PortfolioList({portforlioData, portfolioHeader, }) {
+import BaseButton from './BaseButton';
+import { PortfolioType } from '../types';
 
-  const portfolioListItems = portforlioData.map((item, index) => {
-      return (
-        <tr key={index}>
+interface Props {
+  portfolioData: PortfolioType[],
+  portfolioHeader: string[]
+}
+export default function PortfolioList({portfolioData, portfolioHeader} :Props) {
+
+  const portfolioListItems = portfolioData.map((item, index) => {
+    return (
+      <tr key={index}>
         <td>
-          {item.name}
+          <div className='flex gap-4'>
+            <img className="w-6 h-6" src={item.src}></img>
+            <span>{item.name}</span>
+          </div>           
         </td>
         <td>
           {item.ticker}
@@ -19,8 +29,11 @@ export default function PortfolioList({portforlioData, portfolioHeader, }) {
         <td>
           ${item.price * item.quantity}
         </td>
+        <td>
+          <BaseButton label={"Buy"} color={"green"} />
+        </td>
       </tr>
-      )
+    )
     
   })
    
@@ -31,19 +44,19 @@ export default function PortfolioList({portforlioData, portfolioHeader, }) {
       </th>
     )
   
-})
+  })
   return (
     <>
-  <table>
-    <thead>
-      <tr>
-        { portfolioListHeader }
-      </tr>
-      </thead>
-      <tbody>
-        { portfolioListItems }
-      </tbody>    
-  </table>
+      <table>
+        <thead>
+          <tr>
+            { portfolioListHeader }
+          </tr>
+        </thead>
+        <tbody>
+          { portfolioListItems }
+        </tbody>    
+      </table>
     </>
   )
 }

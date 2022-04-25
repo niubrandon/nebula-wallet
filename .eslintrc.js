@@ -5,7 +5,7 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    "plugin:react/jsx-runtime",
+    'plugin:react/jsx-runtime',
     'eslint:recommended',
   ],
   parser: '@typescript-eslint/parser',
@@ -21,5 +21,7 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    indent: ['error', 2],
+    'no-multi-space': ['error']
   },
 };
