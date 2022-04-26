@@ -13,6 +13,9 @@ function App() {
   const onSignIn = () => {
     navigate("/login")
   }
+  const onSignup = () => {
+    navigate("/register")
+  }
   const onHomepage = () => {
     navigate("/")
   }
@@ -25,7 +28,7 @@ function App() {
         </div>
         <div className="flex gap-2">
           <button className="h-[45px] w-[120px] rounded font-bold" onClick={onSignIn}>Sign in</button>
-          <button className="h-[45px] w-[120px] bg-sky-600 rounded text-white font-bold">Get started</button>
+          <button className="h-[45px] w-[120px] bg-sky-600 rounded text-white font-bold" onClick={onSignup} >Get started</button>
         </div>
       </header>
       
