@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import '../styles/modal.css'
 import axios from 'axios';
 
@@ -6,16 +6,15 @@ export default function LoginForm () {
   const  [email, setEmail] = useState<string>("")
   const  [password, setPassword] = useState<string>("")
 
-
-  const login = (e) => {
-    e.preventDefault()
-    console.log("signup form submitted")
-    setEmail(e.email)
-    setPassword(e.password)
-
+  useEffect(() => {
+    console.log("user is", email, password)
+    if(!email) {
+      return
+    }
+    console.log("after user is", email, password)
     axios({
-      method: 'get',
-      url: 'http://localhost:8080/',
+      method: 'post',
+      url: 'http://localhost:8080/users',
       data: {
         email: email,
         password: password
@@ -25,6 +24,18 @@ export default function LoginForm () {
     }).catch(function (error: any) {
       console.log(error)
     })
+
+    
+  
+  },[email])
+
+  const login = (e) => {
+    e.preventDefault()
+    console.log("signup form submitted",e)
+    setEmail(e.target[0].value)
+    setPassword(e.target[1].value)
+
+
   }
   return (
     <>
