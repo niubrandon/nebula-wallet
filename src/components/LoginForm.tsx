@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react"
+import {useNavigate } from 'react-router-dom';
 import '../styles/modal.css'
 import axios from 'axios';
 
-export default function LoginForm () {
+interface Props {
+  authUser: string
+  setAuthUser: Function
+}
+
+export default function LoginForm ({authUser, setAuthUser}: Props) {
   const  [email, setEmail] = useState<string>("")
   const  [password, setPassword] = useState<string>("")
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     console.log("user is", email, password)
@@ -18,24 +26,27 @@ export default function LoginForm () {
       data: {
         email: email,
         password: password
-      }
+      },
+      withCredentials: true
     }).then(function (response: any) {
-      console.log(response)
+      console.log("post request response:", response)
+      if (response.status === 200) {
+        setAuthUser(email)
+        navigate('/')
+      }
     }).catch(function (error: any) {
       console.log(error)
     })
 
     
   
-  },[email])
+  },[email, password]) 
 
   const login = (e) => {
     e.preventDefault()
     console.log("signup form submitted",e)
     setEmail(e.target[0].value)
     setPassword(e.target[1].value)
-
-
   }
   return (
     <>
