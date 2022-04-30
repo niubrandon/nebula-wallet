@@ -34,6 +34,8 @@ export default function LoginForm ({authUser, setAuthUser}: Props) {
         setAuthUser(email)
         navigate('/')
       }
+      let data = sessionStorage.getItem('token');
+      console.log("jwt token is", data, document.cookie)
     }).catch(function (error: any) {
       console.log(error)
     })
