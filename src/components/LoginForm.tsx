@@ -22,7 +22,7 @@ export default function LoginForm ({authUser, setAuthUser}: Props) {
     console.log("after user is", email, password)
     axios({
       method: 'post',
-      url: 'http://localhost:8080/users',
+      url: 'http://localhost:8080/users/login',
       data: {
         email: email,
         password: password
@@ -44,7 +44,7 @@ export default function LoginForm ({authUser, setAuthUser}: Props) {
   
   },[email, password]) 
 
-  const login = (e) => {
+  const onLogin = (e) => {
     e.preventDefault()
     console.log("signup form submitted",e)
     setEmail(e.target[0].value)
@@ -55,7 +55,7 @@ export default function LoginForm ({authUser, setAuthUser}: Props) {
       <form 
         id="login-form" 
         className="w-[600px] h-[450px] px-24 flex flex-col justify-center items-center gap-2 shadow-md rounded-md modal" 
-        onSubmit={login}>
+        onSubmit={onLogin}>
         <label>Email:</label>
         <input 
           id="email" 
