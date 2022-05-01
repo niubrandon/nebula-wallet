@@ -18,6 +18,9 @@ export default function SignupForm ({authUser, setAuthUser}: Props) {
   let navigate = useNavigate();
   
   useEffect(()=> {
+    if(!email || !password || !username || !phone) {
+      return
+    }
     axios({
       method: 'post',
       url: 'http://localhost:8080/users',
