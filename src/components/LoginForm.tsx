@@ -4,11 +4,10 @@ import '../styles/modal.css'
 import axios from 'axios';
 
 interface Props {
-  authUser: string
   setAuthUser: Function
 }
 
-export default function LoginForm ({authUser, setAuthUser}: Props) {
+export default function LoginForm ({setAuthUser}: Props) {
   const  [email, setEmail] = useState<string>("")
   const  [password, setPassword] = useState<string>("")
 
@@ -31,11 +30,13 @@ export default function LoginForm ({authUser, setAuthUser}: Props) {
     }).then(function (response: any) {
       console.log("post request response:", response)
       if (response.status === 200) {
-        setAuthUser(email)
+        let allCookies = document.cookie 
+        console.log("jwt token is", allCookies)
+        setAuthUser({email: email, jwt: "abs" })
         navigate('/')
       }
-      let data = sessionStorage.getItem('token');
-      console.log("jwt token is", data, document.cookie)
+
+     
     }).catch(function (error: any) {
       console.log(error)
     })
@@ -46,7 +47,7 @@ export default function LoginForm ({authUser, setAuthUser}: Props) {
 
   const onLogin = (e) => {
     e.preventDefault()
-    console.log("signup form submitted",e)
+    console.log("login form submitted",e)
     setEmail(e.target[0].value)
     setPassword(e.target[1].value)
   }

@@ -4,11 +4,10 @@ import '../styles/modal.css'
 import axios from 'axios';
 
 interface Props {
-  authUser: string
   setAuthUser: Function
 }
 
-export default function SignupForm ({authUser, setAuthUser}: Props) {
+export default function SignupForm ({setAuthUser}: Props) {
 
   const [username, setUsername] = useState<string>("")
   const [email, setEmail] = useState<string>("")
@@ -34,7 +33,7 @@ export default function SignupForm ({authUser, setAuthUser}: Props) {
       console.log(response)
       console.log("post request response:", response)
       if (response.status === 200) {
-        setAuthUser(email)
+        setAuthUser({email: email, jwt: "abs"})
         navigate('/')
       }
  

@@ -7,9 +7,14 @@ import LoginForm from './components/LoginForm';
 import './App.css';
 import './index.css';
 
+interface AuthUser {
+  email: string
+  jwt: string
+}
+
 
 function App() {
-  const [authuser, setAuthuser] = useState("");
+  const [authuser, setAuthuser] = useState<(AuthUser|null)>(null);
   let navigate = useNavigate();
   const onSignIn = () => {
     navigate("/login")
@@ -29,7 +34,7 @@ function App() {
         </div>
         <div className="flex items-center gap-2">
           {!authuser && <button className="h-[45px] w-[120px] rounded font-bold" onClick={onSignIn}>Sign in</button>}
-          {authuser && <span>{authuser}</span>} 
+          {authuser && <span>{authuser.email}</span>} 
           <button className="h-[45px] w-[120px] bg-sky-600 rounded text-white font-bold" onClick={onSignup} >Get started</button>
         </div>
       </header>
@@ -37,8 +42,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/register" element={<SignupForm authUser={authuser} setAuthUser={setAuthuser} />}/>
-        <Route path="/login" element={<LoginForm authUser={authuser} setAuthUser={setAuthuser} />}/>
+        <Route path="/register" element={<SignupForm setAuthUser={setAuthuser} />}/>
+        <Route path="/login" element={<LoginForm setAuthUser={setAuthuser} />}/>
       </Routes>
       
       <footer>
